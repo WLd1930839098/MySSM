@@ -47,7 +47,9 @@ public class UserController {
             //将搜索的字符串再次传递到前端,以便在搜索结果中使用换页功能
             session.setAttribute("sn",name);
         }else if(type==2){
-            //
+            //当搜索完毕之后接着点击侧边栏的用户管理界面（这时我们想要查询全部）
+            // 若不删除sn，由于之前存在sn（上一次的搜索名字）
+            //显示的结果任然是上次的搜索结果
             session.removeAttribute("sn");
         }
         else {
