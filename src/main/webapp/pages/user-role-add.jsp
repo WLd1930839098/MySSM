@@ -6,7 +6,7 @@
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>添加角色</title>
+<title>用户设置角色</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 
@@ -60,10 +60,18 @@
 				用户管理 <small>添加角色表单</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
-						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/user/findAllUsers.do">用户管理</a></li>
+				<li>
+					<a href="${pageContext.request.contextPath}/pages/main.jsp">
+						<i class="fa fa-dashboard"></i>
+						首页
+					</a>
+				</li>
+
+				<li>
+					<a href="${pageContext.request.contextPath}/user/findAllUsers.do">
+						用户管理
+					</a>
+				</li>
 				<li class="active">添加角色表单</li>
 			</ol>
 			</section>
@@ -77,8 +85,7 @@
 				
 				<input type="hidden" name="userId" value="${id}">
 				
-					<table id="dataList"
-							class="table table-bordered table-striped table-hover dataTable">
+					<table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 							<thead>
 								<tr>
 									<th class="" style="padding-right: 0px">
@@ -177,7 +184,7 @@
 				locale : 'zh-CN'
 			});
 			// 全选操作 
-			$("#selall").click(function() {
+			$("#selectAll").click(function() {
 				var clicks = $(this).is(':checked');
 				if (!clicks) {
 					$("#dataList td input[type='checkbox']").iCheck("uncheck");
@@ -215,7 +222,7 @@
 				// location.href="/usr/addRoleToUser.do?roles="+rolesList.toString()+"&userId"+userId;
 				$.ajax({
 					type:"post",
-					url:"${pageContext.request.contextPath}/user/addRoleToUser.do",
+					url:"${pageContext.request.contextPath}/user/addRole.do",
 					data:{
 						roleList:roleList.toString(),
 						userId:userId.toString()
