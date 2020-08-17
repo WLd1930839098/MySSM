@@ -6,9 +6,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>书店管理系统</title>
-<meta name="description" content="书店管理系统">
-<meta name="keywords" content="书店管理系统">
+<title>图书管理系统</title>
+<meta name="description" content="图书管理系统">
+<meta name="keywords" content="图书管理系统">
 
 <meta
 	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"

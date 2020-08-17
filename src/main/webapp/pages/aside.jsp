@@ -44,6 +44,19 @@
 							角色管理
 						</a>
 					</li>
+					<li id="system-books">
+						<a href="${pageContext.request.contextPath}/book/findAll.do">
+							<i class="fa fa-circle-o"></i>
+							书库
+						</a>
+					</li>
+					<li id="system-borrow">
+						<a href="${pageContext.request.contextPath}/borrow/findAll.do">
+							<i class="fa fa-circle-o"></i>
+							借阅记录
+						</a>
+					</li>
+
 				</ul>
 			</li>
 		</ul>

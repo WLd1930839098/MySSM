@@ -3,9 +3,9 @@
 <!-- 页面头部 -->
 <header class="main-header">
 	<!-- Logo -->
-	<a href="aaaa.html" class="logo">
-		<span class="logo-mini"><b>数据</b></span>
-		<span class="logo-lg">bins<b>书店</b>管理系统</span>
+	<a href="${pageContext.request.contextPath}/pages/main.jsp" class="logo">
+		<span class="logo-mini"><b>系统</b></span>
+		<span class="logo-lg">√4<b>图书</b>管理系统</span>
 	</a>
 
 	<!-- Header Navbar: style can be found in header.less -->
