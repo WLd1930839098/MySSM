@@ -55,7 +55,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <!-- 6.开启事务注解-->
-    <tx:annotation-driven></tx:annotation-driven>
+    <!-- 6.开启事务注解,哪些方法需要事务你就在那个方法上写一个@Transactional-->
+    <tx:annotation-driven/>
 
 </beans>

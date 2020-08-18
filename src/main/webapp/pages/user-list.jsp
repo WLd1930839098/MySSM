@@ -331,7 +331,8 @@
 					$.ajax({
 						type:"post",
 						url: "${pageContext.request.contextPath}/user/deleteUserByIds.do",
-						data:{userIdList:userIdList.toString()},
+						data:{userIdList:userIdList},
+						traditional:true,
 						success:function () {
 							alert("删除成功");
 							location.reload();

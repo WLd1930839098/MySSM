@@ -89,24 +89,10 @@
                     <!-- 数据表格 -->
                     <div class="table-box">
                         <!--工具栏-->
-                        <%--<div class="pull-left">--%>
-                            <%--<div class="form-group form-inline">--%>
-                                <%--<div class="btn-group">--%>
-                                    <%--<button type="button" class="btn btn-default" title="新建"--%>
-                                            <%--onclick="location.href='${pageContext.request.contextPath}/pages/book-add.jsp'" >--%>
-                                        <%--<i class="fa fa-file-o"></i> 图书入库--%>
-                                    <%--</button>--%>
-
-                                    <%--<button type="button" ondblclick="deleteAll()" class="btn btn-default" title="删除" onclick="deleteAll()">--%>
-                                        <%--<i class="fa fa-refresh"></i> 图书出库--%>
-                                    <%--</button>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                         <form action="${pageContext.request.contextPath}/borrow/findAll.do" method="post">
                             <div class="col-md-4 data1">
                                 <input type="text" class="form-control" name="name"
-                                       placeholder="请输入图书名" value="">
+                                       placeholder="请输入用户名" value="">
                             </div>
                             <button type="submit" class="btn bg-maroon">搜索</button>
                         </form>
@@ -117,12 +103,12 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px">
-                                    <input id="selectAll" type="checkbox" class="icheckbox_square-blue">
-                                </th>
                                 <th class="sorting_asc">序号</th>
-                                <th class="sorting_desc">图书id</th>
-                                <th class="sorting_asc sorting_asc_disabled">图书名</th>
+                                <th class="sorting_asc">用户Id</th>
+                                <th class="sorting_asc">用户名</th>
+                                <th class="sorting_asc">图书Id</th>
+                                <th class="sorting_asc">图书名</th>
+                                <th class="sorting_asc">借阅时间</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
@@ -131,21 +117,15 @@
                             <c:forEach items="${pageInfo.list}" var="borrow">
                             <tr>
                                 <td><%=++i%></td>
+                                <td>${borrow.userId}</td>
+                                <td>${borrow.userName}</td>
                                 <td>${borrow.bookId}</td>
                                 <td>${borrow.bookName}</td>
+                                <td>${borrow.time}</td>
                                 <td class="text-center">
-                                        <%--<a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">--%>
-                                        <%--更新图书信息--%>
-                                        <%--</a>--%>
-
-                                    <a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">
-                                        查看详情
+                                    <a href="${pageContext.request.contextPath}/borrow/returnBook.do?userId=${borrow.userId}&bookId=${borrow.bookId}" class="btn bg-olive btn-xs">
+                                        归还
                                     </a>
-
-                                    <a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">
-                                        借阅
-                                    </a>
-
                                 </td>
                                 </c:forEach>
                             </tr>

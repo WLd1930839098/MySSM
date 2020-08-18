@@ -25,17 +25,17 @@ public class Borrow {
         return bookName;
     }
 
-    private Timestamp timestamp;
+    private Timestamp time;
 
     public Borrow() {
     }
 
-    public Borrow(int userId, String userName, int bookId, String bookName, Timestamp timestamp) {
+    public Borrow(int userId, String userName, int bookId, String bookName, Timestamp time) {
         this.userId = userId;
         this.userName = userName;
         this.bookId = bookId;
         this.bookName = bookName;
-        this.timestamp = timestamp;
+        this.time = time;
     }
 
     public int getUserId() {
@@ -47,8 +47,8 @@ public class Borrow {
         return bookId;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Timestamp getTime() {
+        return time;
     }
 
     public void setUserId(int userId) {
@@ -59,7 +59,7 @@ public class Borrow {
         this.bookId = bookId;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 }

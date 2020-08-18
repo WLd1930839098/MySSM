@@ -9,7 +9,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				<a href="#"><i class="fa fa-circle text-success"></i>${user.name} 在线</a>
 			</div>
 		</div>
 

@@ -17,4 +17,12 @@
         </if>
     </select>
 
+    <insert id="borrowBook">
+        insert into t_borrow(userId,bookId,time) values(#{userId},#{bookId},now())
+    </insert>
+
+    <delete id="returnBook">
+        delete from t_borrow where userId=#{userId} and bookId=#{bookId}
+    </delete>
+
 </mapper>

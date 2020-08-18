@@ -1,4 +1,5 @@
 <%@ page import="java.util.List" %>
+<%@ page import="com.bins.bean.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/bookstore/findAll.do">
+                    <a href="${pageContext.request.contextPath}/book/findAll.do">
                         图书管理
                     </a>
                 </li>
@@ -103,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="${pageContext.request.contextPath}/bookstore/findAll.do" method="post">
+                        <form action="${pageContext.request.contextPath}/book/findAll.do" method="post">
                             <div class="col-md-4 data1">
                                 <input type="text" class="form-control" name="name"
                                        placeholder="请输入图书名" value="">
@@ -130,7 +131,7 @@
                             <c:forEach items="${pageInfo.list}" var="book">
                             <tr>
                                 <td>
-                                    <input id="ids" name="ids" type="checkbox" value="${user.id}">
+                                    <input id="ids" name="ids" type="checkbox" value="${book.id}">
                                 </td>
                                 <td>${book.id}</td>
                                 <td>${book.name}</td>
@@ -140,11 +141,11 @@
                                         <%--更新图书信息--%>
                                     <%--</a>--%>
 
-                                    <a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">
-                                        查看详情
-                                    </a>
+                                    <%--<a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">--%>
+                                        <%--查看详情--%>
+                                    <%--</a>--%>
 
-                                    <a href="${pageContext.request.contextPath}" class="btn bg-olive btn-xs">
+                                    <a href="${pageContext.request.contextPath}/borrow/borrowBook.do?userId=${user.id}&bookNameId=${book.id}" class="btn bg-olive btn-xs">
                                         借阅
                                     </a>
 
@@ -163,13 +164,13 @@
                 <div class="box-tools pull-right">
                     <ul class="pagination">
                         <li>
-                            <a href="${pageContext.request.contextPath}/bookstore/findAll.do" aria-label="Previous">
+                            <a href="${pageContext.request.contextPath}/book/findAll.do" aria-label="Previous">
                                 首页
                             </a>
                         </li>
                         <c:if test="${pageInfo.currentPage-1>0}">
                             <li>
-                                <a href="${pageContext.request.contextPath}/bookstore/findAll.do?currentPage=${pageInfo.currentPage-1}">
+                                <a href="${pageContext.request.contextPath}/book/findAll.do?currentPage=${pageInfo.currentPage-1}">
                                     上一页
                                 </a>
                             </li>
@@ -177,7 +178,7 @@
 
                         <c:forEach begin = "1" end="${pageInfo.totalPage}" var="pageNum">
                             <li>
-                                <a href="${pageContext.request.contextPath}/bookstore/findAll.do?currentPage=${pageNum}">
+                                <a href="${pageContext.request.contextPath}/book/findAll.do?currentPage=${pageNum}">
                                         ${pageNum}
                                 </a>
                             </li>
@@ -185,14 +186,14 @@
 
                         <c:if test="${pageInfo.currentPage<pageInfo.totalPage}">
                             <li>
-                                <a href="${pageContext.request.contextPath}/bookstore/findAll.do?currentPage=${pageInfo.currentPage+1}">
+                                <a href="${pageContext.request.contextPath}/book/findAll.do?currentPage=${pageInfo.currentPage+1}">
                                     下一页
                                 </a>
                             </li>
                         </c:if>
 
                         <li>
-                            <a href="${pageContext.request.contextPath}/bookstore/findAll.do?currentPage=${pageInfo.totalPage}" aria-label="Next">
+                            <a href="${pageContext.request.contextPath}/book/findAll.do?currentPage=${pageInfo.totalPage}" aria-label="Next">
                                 尾页
                             </a>
                         </li>
@@ -322,16 +323,17 @@
             return;
         }
         if(confirm("确认要删除这些用户吗？")){
-            var userIdList=new Array();
+            var bookNameIdList=new Array();
             $("input[name='ids']:checked").each(
                 function () {
-                    userIdList.push($(this).val())
+                    bookNameIdList.push($(this).val())
                 }
             );
             $.ajax({
                 type:"post",
-                url: "${pageContext.request.contextPath}/user/deleteUserByIds.do",
-                data:{userIdList:userIdList.toString()},
+                url: "${pageContext.request.contextPath}/book/deleteByBookNameId.do",
+                data:{ids:bookNameIdList},
+                traditional:true,
                 success:function () {
                     alert("删除成功");
                     location.reload();

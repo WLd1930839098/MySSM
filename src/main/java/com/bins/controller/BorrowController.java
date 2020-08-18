@@ -25,4 +25,17 @@ public class BorrowController {
         modelAndView.setViewName("borrow-list");
         return modelAndView;
     }
+
+    @RequestMapping("borrowBook.do")
+    public String borrowBook(int userId,int bookNameId){
+
+        borrowService.borrow(userId,bookNameId);
+        return "redirect:/book/findAll.do";
+    }
+
+    @RequestMapping("returnBook.do")
+    public String returnBook(int userId,int bookId){
+        borrowService.returnBook(userId,bookId);
+        return "redirect:/borrow/findAll.do";
+    }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bins.dao.BookDao">
+
+    <select id="findAll" resultType="bookStoreItem">
+        select * from v_book_store
+        <if test="name!=null and name!=''">
+            where name like concat('%',#{name},'%')
+        </if>
+        limit #{start},5
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from v_book_store
+        <if test="name!=null and name!=''">
+            where name like concat('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="findBookNameId" resultType="Integer">
+        select nameId from t_book2 where name=#{name}
+    </select>
+
+    <select id="findNextBookNameId" resultType="int">
+        select max(nameId)+1 from t_book2
+    </select>
+
+    <insert id="addBookName">
+        insert into t_book2(nameId,name) values(#{bookNameId},#{bookName})
+    </insert>
+
+    <insert id="addBook">
+        insert into t_book1(nameId) values(#{bookNameId})
+    </insert>
+
+    <delete id="deleteBookByBookNameIds">
+        delete from t_book1 where nameId in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        and free=1;
+    </delete>
+
+    <select id="findFreeBookIdByNameId" resultType="int">
+        select min(bookId) from t_book1 where nameId=#{nameId} and free=1;
+    </select>
+
+    <update id="setBookBorrowed">
+        update t_book1 set free=0 where bookId=#{bookId}
+    </update>
+
+    <update id="setBookReturned">
+        update t_book1 set free=1 where bookId=#{bookId}
+    </update>
+</mapper>

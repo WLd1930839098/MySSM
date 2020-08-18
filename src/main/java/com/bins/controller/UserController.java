@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         if(user!=null){
             session.setAttribute("user",user);
+//            session.setAttribute("userLoginId",user.getId());
             modelAndView.setViewName("main");
         }else{
             modelAndView.setViewName("../failer");
@@ -86,12 +89,11 @@ public class UserController {
 
     @RequestMapping("deleteUserByIds.do")
     @ResponseBody
-    public String deleteUserByIds(String userIdList){
-        String[] userIds = userIdList.split(",");
+    public String deleteUserByIds(int[] userIdList){
         List<Integer> ids = new ArrayList<>();
-        for(String tmp:userIds){
-            ids.add(Integer.parseInt(tmp));
-        }
+        for(int i:userIdList)
+            ids.add(i);
+
         userService.deleteByIds(ids);
         return "ok";
     }
